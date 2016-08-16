@@ -13,6 +13,7 @@ else {
 
 describe('Typecheck', function () {
 
+  ok('react-optional-prop');
   ok('react-decorator', {bar: 'bar'});
   ok('react-parameterized', {bar: 'bar'});
   failWith(`

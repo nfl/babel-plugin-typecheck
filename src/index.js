@@ -706,7 +706,7 @@ export default function ({types: t, template}): Object {
         type.properties.map(
           prop => t.objectProperty(
             t.identifier(prop.key.name),
-            generatePropType(prop.value, path.scope, context)
+            generatePropType(prop.value, prop.optional, path.scope, context)
           )
         )
       );
@@ -1709,7 +1709,17 @@ export default function ({types: t, template}): Object {
     return declaration;
   }
 
-  function checkAnnotation (input: Node, annotation: TypeAnnotation, scope: Scope): ?Node {
+  function checkAnnotation (input: Node, annotation: TypeAnnotation, scope: Scope, optional: ?boolean): ?Node {
+    optional = optional || false;
+
+    if (optional) {
+      return t.logicalExpression(
+        '||',
+        checks.undefined({input}),
+        checkAnnotation(input, annotation, scope, false),
+      );
+    }
+
     switch (annotation.type) {
       case 'TypeAnnotation':
       case 'FunctionTypeParam':
@@ -3135,9 +3145,9 @@ export default function ({types: t, template}): Object {
   /**
    * Create a React property validator
    */
-  function generatePropType (annotation: TypeAnnotation, scope: Scope, context: VisitorContext) {
+  function generatePropType (annotation: TypeAnnotation, optional: boolean, scope: Scope, context: VisitorContext) {
     const prop = t.identifier('prop');
-    const check = checkAnnotation(prop, annotation, scope);
+    const check = checkAnnotation(prop, annotation, scope, optional);
     if (check) {
       return propType({
         check,
