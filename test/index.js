@@ -13,7 +13,19 @@ else {
 
 describe('Typecheck', function () {
 
-  ok('react-optional-prop');
+  ok('react-optional-prop', {bar: 'hello world'});
+  ok('react-optional-prop', {bar: undefined});
+  ok('react-optional-prop', {});
+  failWith(`
+    Invalid prop \`bar\` supplied to \`Foo\`.
+
+    Expected:
+    string
+
+    Got:
+    null
+  `, 'react-optional-prop', {bar: null});
+
   ok('react-decorator', {bar: 'bar'});
   ok('react-parameterized', {bar: 'bar'});
   failWith(`

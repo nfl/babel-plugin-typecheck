@@ -8,8 +8,8 @@ class Foo extends React {
   render() {}
 }
 
-export default function demo () {
-  const error = Foo.propTypes.bar({bar: undefined}, 'bar', 'Foo');
+export default function demo (props) {
+  const error = Foo.propTypes.bar(props, 'bar', 'Foo');
   if (error) {
     throw error;
   }
