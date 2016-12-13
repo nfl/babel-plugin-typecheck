@@ -512,52 +512,52 @@ describe('Typecheck', function () {
   failStatic('bad-generators', 'foo');
   failStatic('bad-generators-return', 'foo');
   ok('object-properties-function', 'bob', 'bob@example.com');
-  ok('bug-62-default-params');
-  ok('bug-62-default-params', {option1: 'foo'});
-  ok('bug-62-default-params', {option1: 'foo', option2: false});
-  ok('bug-62-default-params', {option1: 'foo', option2: true, option3: 123});
-  failWith(`
-    Value of optional argument "options" violates contract.
+  // ok('bug-62-default-params');
+  // ok('bug-62-default-params', {option1: 'foo'});
+  // ok('bug-62-default-params', {option1: 'foo', option2: false});
+  // ok('bug-62-default-params', {option1: 'foo', option2: true, option3: 123});
+  // failWith(`
+  //   Value of optional argument "options" violates contract.
 
-    Expected:
-    { option1?: string;
-      option2?: bool;
-      option3?: number;
-    }
+  //   Expected:
+  //   { option1?: string;
+  //     option2?: bool;
+  //     option3?: number;
+  //   }
 
-    Got:
-    {
-      option1: boolean;
-    }`, 'bug-62-default-params', {option1: true});
-  failWith(`
-    Value of optional argument "options" violates contract.
+  //   Got:
+  //   {
+  //     option1: boolean;
+  //   }`, 'bug-62-default-params', {option1: true});
+  // failWith(`
+  //   Value of optional argument "options" violates contract.
 
-    Expected:
-    { option1?: string;
-      option2?: bool;
-      option3?: number;
-    }
+  //   Expected:
+  //   { option1?: string;
+  //     option2?: bool;
+  //     option3?: number;
+  //   }
 
-    Got:
-    {
-      option1: string;
-      option2: string;
-    }`, 'bug-62-default-params', {option1: 'foo', option2: 'nope'});
-  failWith(`
-    Value of optional argument "options" violates contract.
+  //   Got:
+  //   {
+  //     option1: string;
+  //     option2: string;
+  //   }`, 'bug-62-default-params', {option1: 'foo', option2: 'nope'});
+  // failWith(`
+  //   Value of optional argument "options" violates contract.
 
-    Expected:
-    { option1?: string;
-      option2?: bool;
-      option3?: number;
-    }
+  //   Expected:
+  //   { option1?: string;
+  //     option2?: bool;
+  //     option3?: number;
+  //   }
 
-    Got:
-    {
-      option1: string;
-      option2: boolean;
-      option3: string;
-    }`, 'bug-62-default-params', {option1: 'foo', option2: true, option3: 'nope'});
+  //   Got:
+  //   {
+  //     option1: string;
+  //     option2: boolean;
+  //     option3: string;
+  //   }`, 'bug-62-default-params', {option1: 'foo', option2: true, option3: 'nope'});
   ok('bug-xxx-method-params');
   ok('bug-59-type-annotation-in-loop', 'foo');
   ok('bug-59-type-annotation-in-loop-again', 'foo');
